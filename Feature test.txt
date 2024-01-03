@@ -1,0 +1,1 @@
+This file will explain what features or code that needs to be tested when commited to the Feature test branch in github
