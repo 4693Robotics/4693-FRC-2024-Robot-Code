@@ -18,6 +18,7 @@ import edu.wpi.first.util.WPIUtilJNI;
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
@@ -46,7 +47,7 @@ public class DriveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightChassisAngularOffset);
 
   // The gyro sensor
-  private final AHRS m_gyro = new AHRS(SerialPort.Port.kUSB1);
+  private final AHRS m_gyro = new AHRS(Port.kOnboard);
 
   // Slew rate filter variables for controlling lateral acceleration
   private double m_currentRotation = 0.0;
