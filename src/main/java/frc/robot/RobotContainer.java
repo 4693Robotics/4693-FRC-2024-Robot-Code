@@ -97,7 +97,10 @@ public Object drive;
                false, true),
               m_robotDrive));
 
-       // SmartDashboard.putBoolean("Field Orientated is true", );
+    new JoystickButton(m_driverController, Button.kL1.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotDrive.zeroHeading()
+        ));
   }
 
   
