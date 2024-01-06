@@ -13,12 +13,12 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.WPIUtilJNI;
-//Other Gyro librarys if needed to change gyro
-//import edu.wpi.first.wpilibj.ADIS16470_IMU;
-//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
@@ -58,6 +58,12 @@ public class DriveSubsystem extends SubsystemBase {
   private SlewRateLimiter m_rotLimiter = new SlewRateLimiter(DriveConstants.kRotationalSlewRate);
   private double m_prevTime = WPIUtilJNI.now() * 1e-6;
 
+  ShuffleboardTab TeleopTab = Shuffleboard.getTab("Teleop");
+
+  ComplexWidget Gyro = Shuffleboard.getTab("Teleop")
+  .add("Gyro", m_gyro)
+  .withWidget(BuiltInWidgets.kGyro);
+
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
@@ -75,10 +81,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //ShuffleBoard Feedback for Information
-    SmartDashboard.putNumber("Gyro angle", invertGyro_Angle());
-    //SmartDashboard.putNumberArray("Swerve Module Position", SwerveModulePosition[m_driverController.getRate]);
-
     // Update the odometry in the periodic block
     m_odometry.update(
         Rotation2d.fromDegrees(invertGyro_Angle()),
@@ -88,6 +90,13 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
+
+    SmartDashboard.putNumber("FL Position", m_frontLeft.GetEncode().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("FR Position", m_frontRight.GetEncode().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("RL Position", m_rearLeft.GetEncode().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("RR Position", m_rearRight.GetEncode().getPosition() * 180/Math.PI);
+
+
   }
 
   /**
