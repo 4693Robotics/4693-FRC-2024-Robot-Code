@@ -59,10 +59,12 @@ public class DriveSubsystem extends SubsystemBase {
   private double m_prevTime = WPIUtilJNI.now() * 1e-6;
 
   ShuffleboardTab TeleopTab = Shuffleboard.getTab("Teleop");
+  ShuffleboardTab PreGameTab = Shuffleboard.getTab("Pre Game");
 
   ComplexWidget Gyro = Shuffleboard.getTab("Teleop")
   .add("Gyro", m_gyro)
-  .withWidget(BuiltInWidgets.kGyro);
+  .withWidget(BuiltInWidgets.kGyro)
+  .withPosition(0, 4);
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
@@ -95,6 +97,7 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("FR Position", m_frontRight.GetEncode().getPosition() * 180/Math.PI);
     SmartDashboard.putNumber("RL Position", m_rearLeft.GetEncode().getPosition() * 180/Math.PI);
     SmartDashboard.putNumber("RR Position", m_rearRight.GetEncode().getPosition() * 180/Math.PI);
+    SmartDashboard.putBoolean("Gyro Connect", m_gyro.isConnected());
 
 
   }
