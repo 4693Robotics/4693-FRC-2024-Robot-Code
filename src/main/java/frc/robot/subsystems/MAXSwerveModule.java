@@ -111,9 +111,6 @@ public class MAXSwerveModule {
     m_chassisAngularOffset = chassisAngularOffset;
     m_desiredState.angle = new Rotation2d(m_turningEncoder.getPosition());
     m_drivingEncoder.setPosition(0);
-
-     
-    
   }
 
   /**
@@ -166,5 +163,9 @@ public class MAXSwerveModule {
   /** Zeroes all the SwerveModule encoders. */
   public void resetEncoders() {
     m_drivingEncoder.setPosition(0);
+  }
+  
+  public AbsoluteEncoder GetEncode() {
+    return m_turningEncoder;
   }
 }
