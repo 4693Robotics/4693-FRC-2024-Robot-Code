@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
@@ -61,10 +62,14 @@ public class DriveSubsystem extends SubsystemBase {
   ShuffleboardTab TeleopTab = Shuffleboard.getTab("Teleop");
   ShuffleboardTab PreGameTab = Shuffleboard.getTab("Pre Game");
 
-  ComplexWidget Gyro = Shuffleboard.getTab("Teleop")
+  ComplexWidget Gyro = TeleopTab
   .add("Gyro", m_gyro)
   .withWidget(BuiltInWidgets.kGyro)
   .withPosition(0, 4);
+
+  SimpleWidget GyroConnection = PreGameTab
+  .add("Gyro Connection", m_gyro.isConnected())
+  .withWidget(BuiltInWidgets.kBooleanBox);
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(

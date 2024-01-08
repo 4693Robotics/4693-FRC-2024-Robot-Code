@@ -2,3 +2,5 @@ This file will explain what features or code that needs to be tested when commit
 
 1. Test that smartdashboard is picking up on motor temps and that they are updating live in that tab
 2. Test that camera server is working for the robot and is working fine in shuffleboard
+3. Test is the gyro connection works in the pre game tab
+4. Test Tab switching with auto, pre game, and teleop
