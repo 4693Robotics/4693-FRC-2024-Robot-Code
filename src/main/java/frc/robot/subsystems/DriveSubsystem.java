@@ -65,7 +65,7 @@ public class DriveSubsystem extends SubsystemBase {
   ComplexWidget Gyro = TeleopTab
   .add("Gyro", m_gyro)
   .withWidget(BuiltInWidgets.kGyro)
-  .withPosition(0, 4);
+  .withPosition(4, 0);
 
   SimpleWidget GyroConnection = PreGameTab
   .add("Gyro Connection", m_gyro.isConnected())
@@ -103,10 +103,12 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("RL Position", m_rearLeft.getEncoder().getPosition() * 180/Math.PI);
     SmartDashboard.putNumber("RR Position", m_rearRight.getEncoder().getPosition() * 180/Math.PI);
 
-    SmartDashboard.putNumber("FL Temp,", m_frontLeft.getDriveSpark().getMotorTemperature());
-    SmartDashboard.putNumber("FR Temp", m_frontRight.getDriveSpark().getMotorTemperature());
-    SmartDashboard.putNumber("RL Temp", m_rearLeft.getDriveSpark().getMotorTemperature());
-    SmartDashboard.putNumber("RR Temp", m_rearRight.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("FLD Temp,", m_frontLeft.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("FRD Temp", m_frontRight.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RLD Temp", m_rearLeft.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RRD Temp", m_rearRight.getDriveSpark().getMotorTemperature());
+
+    SmartDashboard.putNumber("FLT Temp", m_frontLeft.getTurnSpark().getMotorTemperature());
 
     SmartDashboard.putBoolean("Gyro Connect", m_gyro.isConnected());
 

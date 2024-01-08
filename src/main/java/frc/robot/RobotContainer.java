@@ -55,7 +55,9 @@ public class RobotContainer {
 
   ComplexWidget CameraWidget = TeleopTab
   .add("Camera", m_camera)
-  .withWidget(BuiltInWidgets.kCameraStream);
+  .withWidget(BuiltInWidgets.kCameraStream)
+  .withPosition(6, 0)
+  .withSize(4, 3);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -63,7 +65,6 @@ public class RobotContainer {
   public RobotContainer() {
 
     m_camera.setFPS(CameraConstants.cameraFPS); 
-    m_camera.setResolution(CameraConstants.camereaResWidth, CameraConstants.camereaResWidth);   
 
     SmartDashboard.putData(m_robotDrive);
     // Configure the button bindings
