@@ -165,7 +165,27 @@ public class MAXSwerveModule {
     m_drivingEncoder.setPosition(0);
   }
   
-  public AbsoluteEncoder GetEncode() {
+  /**
+   * 
+   * @return Absolute encoder for module
+   */
+  public AbsoluteEncoder getEncoder() {
     return m_turningEncoder;
+  }
+
+  /**
+   * 
+   * @return Driving spark max for module
+   */
+  public CANSparkMax getDriveSpark() {
+    return m_drivingSparkMax;
+  }
+
+  /**
+   * 
+   * @return Turning spark max for module
+   */
+  public CANSparkMax getTurnSpark() {
+    return m_turningSparkMax;
   }
 }

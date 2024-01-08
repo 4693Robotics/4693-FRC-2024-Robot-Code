@@ -138,4 +138,10 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+
+  public static final class CameraConstants {
+    public static final int cameraFPS = 30;
+    public static final int cameraResHight = 480;
+    public static final int camereaResWidth = 640;
+  }
 }

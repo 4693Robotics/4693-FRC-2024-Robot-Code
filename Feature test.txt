@@ -1,1 +1,4 @@
 This file will explain what features or code that needs to be tested when commited to the Feature test branch in github
+
+1. Test that smartdashboard is picking up on motor temps and that they are updating live in that tab
+2. Test that camera server is working for the robot and is working fine in shuffleboard

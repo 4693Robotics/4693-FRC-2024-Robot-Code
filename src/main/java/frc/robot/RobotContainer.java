@@ -16,10 +16,15 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.Commands.Drive_With_Joysticks;
 import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.CameraConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -38,17 +43,27 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  private UsbCamera camera = CameraServer.startAutomaticCapture();
+  
+  private final UsbCamera m_camera = CameraServer.startAutomaticCapture();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
-public Object drive;
+  public Object drive;
+
+  ShuffleboardTab TeleopTab = Shuffleboard.getTab("Teleop");
+
+  ComplexWidget CameraWidget = TeleopTab
+  .add("Camera", m_camera)
+  .withWidget(BuiltInWidgets.kCameraStream);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    m_camera.setFPS(CameraConstants.cameraFPS); 
+    m_camera.setResolution(CameraConstants.camereaResWidth, CameraConstants.camereaResWidth);   
 
     SmartDashboard.putData(m_robotDrive);
     // Configure the button bindings
@@ -83,7 +98,7 @@ public Object drive;
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
@@ -97,7 +112,7 @@ public Object drive;
                false, true),
               m_robotDrive));
 
-    new JoystickButton(m_driverController, Button.kL1.value)
+    new JoystickButton(m_driverController, Button.kLeftBumper.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.zeroHeading()
         ));

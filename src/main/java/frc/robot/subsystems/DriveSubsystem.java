@@ -93,10 +93,16 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearRight.getPosition()
         });
 
-    SmartDashboard.putNumber("FL Position", m_frontLeft.GetEncode().getPosition() * 180/Math.PI);
-    SmartDashboard.putNumber("FR Position", m_frontRight.GetEncode().getPosition() * 180/Math.PI);
-    SmartDashboard.putNumber("RL Position", m_rearLeft.GetEncode().getPosition() * 180/Math.PI);
-    SmartDashboard.putNumber("RR Position", m_rearRight.GetEncode().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("FL Position", m_frontLeft.getEncoder().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("FR Position", m_frontRight.getEncoder().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("RL Position", m_rearLeft.getEncoder().getPosition() * 180/Math.PI);
+    SmartDashboard.putNumber("RR Position", m_rearRight.getEncoder().getPosition() * 180/Math.PI);
+
+    SmartDashboard.putNumber("FL Temp,", m_frontLeft.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("FR Temp", m_frontRight.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RL Temp", m_rearLeft.getDriveSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RR Temp", m_rearRight.getDriveSpark().getMotorTemperature());
+
     SmartDashboard.putBoolean("Gyro Connect", m_gyro.isConnected());
 
 
