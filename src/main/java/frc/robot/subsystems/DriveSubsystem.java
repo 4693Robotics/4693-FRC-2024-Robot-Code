@@ -14,6 +14,8 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.WPIUtilJNI;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
@@ -109,9 +111,11 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("RRD Temp", m_rearRight.getDriveSpark().getMotorTemperature());
 
     SmartDashboard.putNumber("FLT Temp", m_frontLeft.getTurnSpark().getMotorTemperature());
+    SmartDashboard.putNumber("FRT Temp", m_frontRight.getTurnSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RLT Temp", m_rearLeft.getTurnSpark().getMotorTemperature());
+    SmartDashboard.putNumber("RRT Temp", m_rearRight.getTurnSpark().getMotorTemperature());
 
     SmartDashboard.putBoolean("Gyro Connect", m_gyro.isConnected());
-
 
   }
 
