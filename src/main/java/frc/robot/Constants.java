@@ -116,7 +116,8 @@ public final class Constants {
   }
 
   public static final class IntakeConstants {
-    public static final int kIntakeCanId = 9;
+    public static final int kIntakePowerCanId = 9;
+    public static final int kIntakePositionCanId = 10;
     public static final boolean kIntakeInverted = false;
   }
 
