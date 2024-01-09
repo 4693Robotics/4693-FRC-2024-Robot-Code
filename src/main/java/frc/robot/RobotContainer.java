@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -40,8 +38,6 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Intake m_robotIntake = new Intake();
-
-  private UsbCamera camera = CameraServer.startAutomaticCapture();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -122,6 +118,16 @@ public Object drive;
         .whileTrue(new RunCommand(
             () -> m_robotIntake.intakeForward()
         ));
+
+    new JoystickButton(m_subsystemsController, Button.kX.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotIntake.intakeUp()
+        ));  
+
+     new JoystickButton(m_subsystemsController, Button.kY.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotIntake.intakeDown()
+        ));  
   }
 
   
