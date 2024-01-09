@@ -16,13 +16,14 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.Commands.Drive_With_Joysticks;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -38,10 +39,13 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final Intake m_robotIntake = new Intake();
+
   private UsbCamera camera = CameraServer.startAutomaticCapture();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  XboxController m_subsystemsController = new XboxController(OIConstants.kSubsystemsController);
 
 public Object drive;
 
@@ -71,7 +75,14 @@ public Object drive;
                 -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                 true, true),
             m_robotDrive));
-  }
+  
+
+    m_robotIntake.setDefaultCommand(
+        new RunCommand(
+            () -> m_robotIntake.intakeStart(m_subsystemsController.getLeftY()))
+        );
+    
+}
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -83,7 +94,7 @@ public Object drive;
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, Button.kRightStick.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
@@ -97,9 +108,19 @@ public Object drive;
                false, true),
               m_robotDrive));
 
-    new JoystickButton(m_driverController, Button.kL1.value)
+    new JoystickButton(m_driverController, Button.kLeftBumper.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.zeroHeading()
+        ));
+
+    new JoystickButton(m_subsystemsController, Button.kA.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotIntake.intakeForward()
+        ));
+
+    new JoystickButton(m_subsystemsController, Button.kB.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotIntake.intakeForward()
         ));
   }
 

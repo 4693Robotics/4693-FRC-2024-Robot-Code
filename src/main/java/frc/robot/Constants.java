@@ -115,8 +115,14 @@ public final class Constants {
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
+  public static final class IntakeConstants {
+    public static final int kIntakeCanId = 9;
+    public static final boolean kIntakeInverted = false;
+  }
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kSubsystemsController = 1;
     public static final double kDriveDeadband = 0.1;
   }
 
